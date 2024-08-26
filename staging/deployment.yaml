@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxdep
+  namespace: flucdtutorial
+  labels:
+    app: nginx-deploy
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginxpod
+  template:
+    metadata:
+      labels:
+        app: nginxpod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources: {}
